@@ -1,4 +1,4 @@
-const port = 4000;
+const port = 5000;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -9,7 +9,23 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
-mongoose.connect("mongodb+srv://admin:admin@ecommerce.11isc9c.mongodb.net/?retryWrites=true&w=majority")
+const { MongoClient } = require('mongodb');
+
+const uri = "mongodb+srv://annyshrirao:4FvNRHaidjf2rslz@cluster0.jwaqc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+async function run() {
+    try {
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        await client.connect();
+        console.log("Connected to MongoDB!");
+        await client.close();
+    } catch (error) {
+        console.error("Connection error:", error);
+    }
+}
+run();
+
+
 
 //admin
 
@@ -208,3 +224,7 @@ app.listen(port,(error)=>{
         console.log("error: "+error)
     }
 })
+
+
+//annyshrirao
+//4FvNRHaidjf2rslz
